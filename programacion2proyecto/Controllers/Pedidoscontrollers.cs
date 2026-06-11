@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using programacion2proyecto.Models.Dtos;
 using programacion2proyecto.Models.Entities;
-
 
 namespace programacion2proyecto.Controllers
 {
@@ -25,11 +25,18 @@ namespace programacion2proyecto.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Pedido> Create(Pedido pedido)
+        public ActionResult<Pedido> Create(PedidoDto dto)
         {
-            pedido.Id = _pedidos.Count + 1;
-            pedido.FechaPedido = DateTime.Now;
-            pedido.Estado = "pendiente";
+            var pedido = new Pedido
+            {
+                Id = _pedidos.Count + 1,
+                ClienteId = dto.ClienteId,
+                FechaPedido = DateTime.Now,
+                FechaEntrega = dto.FechaEntrega,
+                Estado = "pendiente",
+                Total = dto.Total,
+                Pagado = dto.Pagado
+            };
             _pedidos.Add(pedido);
             return CreatedAtAction(nameof(GetById), new { id = pedido.Id }, pedido);
         }
