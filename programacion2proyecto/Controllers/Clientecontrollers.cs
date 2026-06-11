@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using programacion2proyecto.Models.Dtos;
 using programacion2proyecto.Models.Entities;
 
 namespace programacion2proyecto.Controllers
@@ -24,37 +25,39 @@ namespace programacion2proyecto.Controllers
             return Ok(cliente);
         }
 
+        // Cambia el método Create - recibe ClienteDto en vez de Cliente
         [HttpPost]
-        public ActionResult<Cliente> Create(Cliente cliente)
+        public ActionResult<Cliente> Create(ClienteDto dto)
         {
-            if (!Cliente.ValidarEmail(cliente.Email ?? ""))
+            if (!Cliente.ValidarEmail(dto.Email))
                 return BadRequest("Email no válido.");
-            if (!Cliente.ValidarTelefono(cliente.Telefono ?? ""))
+            if (!Cliente.ValidarTelefono(dto.Telefono))
                 return BadRequest("Teléfono no válido.");
-            cliente.Id = _clientes.Count + 1;
-            cliente.FechaRegistro = DateTime.Now;
+
+            var cliente = new Cliente
+            {
+                Id = _clientes.Count + 1,
+                Nombre = dto.Nombre,
+                Telefono = dto.Telefono,
+                Email = dto.Email,
+                Direccion = dto.Direccion,
+                FechaRegistro = DateTime.Now
+            };
+
             _clientes.Add(cliente);
             return CreatedAtAction(nameof(GetById), new { id = cliente.Id }, cliente);
         }
 
+        // Cambia el método Update - recibe ClienteDto
         [HttpPut("{id}")]
-        public ActionResult Update(int id, Cliente cliente)
+        public ActionResult Update(int id, ClienteDto dto)
         {
             var existing = _clientes.FirstOrDefault(c => c.Id == id);
             if (existing == null) return NotFound();
-            existing.Nombre = cliente.Nombre;
-            existing.Telefono = cliente.Telefono;
-            existing.Email = cliente.Email;
-            existing.Direccion = cliente.Direccion;
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
-        {
-            var cliente = _clientes.FirstOrDefault(c => c.Id == id);
-            if (cliente == null) return NotFound();
-            _clientes.Remove(cliente);
+            existing.Nombre = dto.Nombre;
+            existing.Telefono = dto.Telefono;
+            existing.Email = dto.Email;
+            existing.Direccion = dto.Direccion;
             return NoContent();
         }
     }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using programacion2proyecto.Models.Dtos;
 using programacion2proyecto.Models.Entities;
-
 
 namespace programacion2proyecto.Controllers
 {
@@ -25,9 +25,17 @@ namespace programacion2proyecto.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Entrega> Create(Entrega entrega)
+        public ActionResult<Entrega> Create(EntregaDto dto)
         {
-            entrega.Id = _entregas.Count + 1;
+            var entrega = new Entrega
+            {
+                Id = _entregas.Count + 1,
+                PedidoId = dto.PedidoId,
+                Tipo = dto.Tipo,
+                Direccion = dto.Direccion,
+                FechaProgramada = dto.FechaProgramada,
+                Confirmada = false
+            };
             _entregas.Add(entrega);
             return CreatedAtAction(nameof(GetById), new { id = entrega.Id }, entrega);
         }

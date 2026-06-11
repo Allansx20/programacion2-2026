@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using programacion2proyecto.Models.Dtos;
 using programacion2proyecto.Models.Entities;
-
 
 namespace programacion2proyecto.Controllers
 {
@@ -26,23 +26,31 @@ namespace programacion2proyecto.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Producto> Create(Producto producto)
+        public ActionResult<Producto> Create(ProductoDto dto)
         {
-            producto.Id = _productos.Count + 1;
+            var producto = new Producto
+            {
+                Id = _productos.Count + 1,
+                Nombre = dto.Nombre,
+                Descripcion = dto.Descripcion,
+                PrecioBase = dto.PrecioBase,
+                Categoria = dto.Categoria,
+                Disponible = dto.Disponible
+            };
             _productos.Add(producto);
             return CreatedAtAction(nameof(GetById), new { id = producto.Id }, producto);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update(int id, Producto producto)
+        public ActionResult Update(int id, ProductoDto dto)
         {
             var existing = _productos.FirstOrDefault(p => p.Id == id);
             if (existing == null) return NotFound();
-            existing.Nombre = producto.Nombre;
-            existing.Descripcion = producto.Descripcion;
-            existing.PrecioBase = producto.PrecioBase;
-            existing.Categoria = producto.Categoria;
-            existing.Disponible = producto.Disponible;
+            existing.Nombre = dto.Nombre;
+            existing.Descripcion = dto.Descripcion;
+            existing.PrecioBase = dto.PrecioBase;
+            existing.Categoria = dto.Categoria;
+            existing.Disponible = dto.Disponible;
             return NoContent();
         }
 
