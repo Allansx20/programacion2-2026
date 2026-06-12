@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using programacion2proyecto.Data;
 using programacion2proyecto.Models.Dtos;
 using programacion2proyecto.Models.Entities;
 
@@ -8,24 +10,27 @@ namespace programacion2proyecto.Controllers
     [Route("api/[controller]")]
     public class ClienteController : ControllerBase
     {
-        private static List<Cliente> _clientes = new List<Cliente>
+        private readonly DataContext _context;
+
+        public ClienteController(DataContext context)
         {
-            new Cliente { Id = 1, Nombre = "María López", Telefono = "8091234567", Email = "maria@gmail.com", Direccion = "Calle 5" },
-            new Cliente { Id = 2, Nombre = "Carlos Pérez", Telefono = "8297654321", Email = "carlos@hotmail.com", Direccion = "Av. 27 de Febrero" }
-        };
+            _context = context;
+        }
 
         [HttpGet]
-        public ActionResult<List<Cliente>> GetAll() => Ok(_clientes);
+        public ActionResult<List<Cliente>> GetAll()
+        {
+            return Ok(_context.Clientes.ToList());
+        }
 
         [HttpGet("{id}")]
         public ActionResult<Cliente> GetById(int id)
         {
-            var cliente = _clientes.FirstOrDefault(c => c.Id == id);
+            var cliente = _context.Clientes.FirstOrDefault(c => c.Id == id);
             if (cliente == null) return NotFound();
             return Ok(cliente);
         }
 
-        // Cambia el método Create - recibe ClienteDto en vez de Cliente
         [HttpPost]
         public ActionResult<Cliente> Create(ClienteDto dto)
         {
@@ -36,7 +41,6 @@ namespace programacion2proyecto.Controllers
 
             var cliente = new Cliente
             {
-                Id = _clientes.Count + 1,
                 Nombre = dto.Nombre,
                 Telefono = dto.Telefono,
                 Email = dto.Email,
@@ -44,20 +48,40 @@ namespace programacion2proyecto.Controllers
                 FechaRegistro = DateTime.Now
             };
 
-            _clientes.Add(cliente);
+            _context.Clientes.Add(cliente);
+            _context.SaveChanges();
+
             return CreatedAtAction(nameof(GetById), new { id = cliente.Id }, cliente);
         }
 
-        // Cambia el método Update - recibe ClienteDto
         [HttpPut("{id}")]
-        public ActionResult Update(int id, ClienteDto dto)
+        public IActionResult Update(int id, ClienteDto dto)
         {
-            var existing = _clientes.FirstOrDefault(c => c.Id == id);
-            if (existing == null) return NotFound();
-            existing.Nombre = dto.Nombre;
-            existing.Telefono = dto.Telefono;
-            existing.Email = dto.Email;
-            existing.Direccion = dto.Direccion;
+            var cliente = _context.Clientes.FirstOrDefault(c => c.Id == id);
+            if (cliente == null) return NotFound();
+
+            if (!Cliente.ValidarEmail(dto.Email))
+                return BadRequest("Email no válido.");
+            if (!Cliente.ValidarTelefono(dto.Telefono))
+                return BadRequest("Teléfono no válido.");
+
+            cliente.Nombre = dto.Nombre;
+            cliente.Telefono = dto.Telefono;
+            cliente.Email = dto.Email;
+            cliente.Direccion = dto.Direccion;
+
+            _context.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var cliente = _context.Clientes.FirstOrDefault(c => c.Id == id);
+            if (cliente == null) return NotFound();
+
+            _context.Clientes.Remove(cliente);
+            _context.SaveChanges();
             return NoContent();
         }
     }
