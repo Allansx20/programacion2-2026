@@ -1,6 +1,6 @@
 ﻿namespace programacion2proyecto.Models.Dtos
 {
-    public class PedidoDto
+    public class PedidoDto : BaseDto
     {
         public int ClienteId { get; set; }
         public DateTime FechaEntrega { get; set; }

@@ -1,8 +1,8 @@
 ﻿namespace programacion2proyecto.Models.Entities
 {
-    public class Entrega
+    public class Entrega : BaseEntity
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public int PedidoId { get; set; }
         public string Tipo { get; set; } = "retiro";
         public string Direccion { get; set; } = string.Empty;

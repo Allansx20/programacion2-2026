@@ -1,8 +1,8 @@
 ﻿namespace programacion2proyecto.Models.Entities
 {
-    public class Pedido
+    public class Pedido : BaseEntity
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public int ClienteId { get; set; }
         public Cliente? Cliente { get; set; }
         public DateTime FechaPedido { get; set; }

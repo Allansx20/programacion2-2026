@@ -1,8 +1,8 @@
 ﻿namespace programacion2proyecto.Models.Entities
 {
-    public class Producto
+    public class Producto : BaseEntity
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
         public decimal PrecioBase { get; set; }

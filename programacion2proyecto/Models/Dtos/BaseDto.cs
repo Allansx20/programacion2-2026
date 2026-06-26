@@ -1,0 +1,8 @@
+﻿namespace programacion2proyecto.Models.Dtos
+{
+    public class BaseDto
+    {
+
+        public int Id { get; set; }
+    }
+}
