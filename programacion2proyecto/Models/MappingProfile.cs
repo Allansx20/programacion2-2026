@@ -17,19 +17,23 @@ namespace programacion2proyecto.Models
             //CreateMap<Entrega, EntregaDto>().ReverseMap();
             CreateMap<Cliente, ClienteDto>().ReverseMap();
             CreateMap<CreateClienteDto, Cliente>();
-            CreateMap<UpdateClienteDto, Cliente>();
+            CreateMap<UpdateClienteDto, Cliente>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Pedido, PedidoDto>().ReverseMap();
             CreateMap<CreatePedidoDto, Pedido>();
-            CreateMap<UpdatePedidoDto, Pedido>();
+            CreateMap<UpdatePedidoDto, Pedido>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Producto, ProductoDto>().ReverseMap();
             CreateMap<CreateProductoDto, Producto>();
-            CreateMap<UpdateProductoDto, Producto>();
+            CreateMap<UpdateProductoDto, Producto>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Entrega, EntregaDto>().ReverseMap();
             CreateMap<CreateEntregaDto, Entrega>();
-            CreateMap<UpdateEntregaDto, Entrega>();
+            CreateMap<UpdateEntregaDto, Entrega>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
         }
     }

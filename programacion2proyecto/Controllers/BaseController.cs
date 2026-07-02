@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using programacion2proyecto.Data;
 using programacion2proyecto.Models.Entities;
+using programacion2proyecto.Models.Responses;
 
 namespace programacion2proyecto.Controllers
 {
@@ -17,25 +18,31 @@ namespace programacion2proyecto.Controllers
             Mapper = mapper;
         }
         [HttpGet]
-        public virtual ActionResult<List<T>> GetAll()
-            => Ok(_context.Set<T>().ToList());
+        public virtual ApiResponse<List<T>> GetAll()
+        {
+            var response = _context.Set<T>().ToList();
+            return ApiResponse<List<T>>.SuccessResponse(response);
+        }
 
         [HttpGet("{id}")]
-        public virtual ActionResult<T> GetById(int id)
+        public virtual ApiResponse<T> GetById(int id)
         {
-            var entity = _context.Set<T>().Find(id);
-            if (entity == null) return NotFound();
-            return Ok(entity);
+            var response = _context.Set<T>().Find(id);
+            if (response == null)
+                return ApiResponse<T>.FailureResponse("Recurso no encontrado.", 404);
+            return ApiResponse<T>.SuccessResponse(response);
         }
 
         [HttpDelete("{id}")]
-        public virtual ActionResult Delete(int id)
+        public virtual ApiResponse<string> Delete(int id)
         {
-            var entity = _context.Set<T>().Find(id);
-            if (entity == null) return NotFound();
-            _context.Set<T>().Remove(entity);
+            var response = _context.Set<T>().Find(id);
+            if (response == null)
+                return ApiResponse<string>.FailureResponse("Recurso no encontrado.", 404);
+
+            _context.Set<T>().Remove(response);
             _context.SaveChanges();
-            return NoContent();
+            return ApiResponse<string>.SuccessResponse("Eliminado correctamente.", 200);
         }
     }
 }

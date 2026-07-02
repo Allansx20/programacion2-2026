@@ -1,11 +1,11 @@
 ﻿namespace programacion2proyecto.Models.Dtos
 {
-    public class UpdateEntregaDto : BaseDto
+    public class UpdateEntregaDto
     {
-        public string Tipo { get; set; } = string.Empty;
-        public string Direccion { get; set; } = string.Empty;
-        public DateTime FechaProgramada { get; set; }
-        public bool Confirmada { get; set; }
+        public string? Tipo { get; set; } 
+        public string? Direccion { get; set; } 
+        public DateTime? FechaProgramada { get; set; }
+        public bool? Confirmada { get; set; }
 
     }
 }
