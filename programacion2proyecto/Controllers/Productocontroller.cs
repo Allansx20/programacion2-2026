@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using programacion2proyecto.Data;
 using programacion2proyecto.Models.Entities;
 
@@ -10,7 +11,8 @@ namespace programacion2proyecto.Controllers
     {
         //private readonly DataContext _context;
 
-        public ProductoController(DataContext context) : base(context) { }
+        public ProductoController(DataContext context, IMapper mapper) : base(context, mapper) { }
+
         //{
         //    //_context = context;
         //}

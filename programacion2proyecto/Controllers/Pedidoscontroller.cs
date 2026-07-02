@@ -11,69 +11,70 @@ namespace programacion2proyecto.Controllers
     {
         //private readonly DataContext _context;
 
-        public PedidoController(DataContext context, IMapper mapper) : base(context, mapper){ }
-        {
-        
-            {
-                //_context = context;
-            }
+        public PedidoController(DataContext context, IMapper mapper) : base(context, mapper) { }
 
-            //[HttpGet]
-            //public ActionResult<List<Pedido>> GetAll()
-            //{
-            //    return Ok(_context.Pedidos.ToList());
-            //}
 
-            //[HttpGet("{id}")]
-            //public ActionResult<Pedido> GetById(int id)
-            //{
-            //    var pedido = _context.Pedidos.FirstOrDefault(p => p.Id == id);
-            //    if (pedido == null) return NotFound();
-            //    return Ok(pedido);
-            //}
+        //{
+        //    _context = context;
+        //}
 
-            //[HttpPost]
-            //public ActionResult<Pedido> Create(PedidoDto dto)
-            //{
-            //    var pedido = new Pedido
-            //    {
-            //        ClienteId = dto.ClienteId,
-            //        FechaPedido = DateTime.Now,
-            //        FechaEntrega = dto.FechaEntrega,
-            //        Estado = "pendiente",
-            //        Total = dto.Total,
-            //        Pagado = dto.Pagado
-            //    };
+        //[HttpGet]
+        //public ActionResult<List<Pedido>> GetAll()
+        //{
+        //    return Ok(_context.Pedidos.ToList());
+        //}
 
-            //    _context.Pedidos.Add(pedido);
-            //    _context.SaveChanges();
+        //[HttpGet("{id}")]
+        //public ActionResult<Pedido> GetById(int id)
+        //{
+        //    var pedido = _context.Pedidos.FirstOrDefault(p => p.Id == id);
+        //    if (pedido == null) return NotFound();
+        //    return Ok(pedido);
+        //}
 
-            //    return CreatedAtAction(nameof(GetById), new { id = pedido.Id }, pedido);
-            //}
+        //[HttpPost]
+        //public ActionResult<Pedido> Create(PedidoDto dto)
+        //{
+        //    var pedido = new Pedido
+        //    {
+        //        ClienteId = dto.ClienteId,
+        //        FechaPedido = DateTime.Now,
+        //        FechaEntrega = dto.FechaEntrega,
+        //        Estado = "pendiente",
+        //        Total = dto.Total,
+        //        Pagado = dto.Pagado
+        //    };
 
-            //[HttpPut("{id}/estado")]
-            //public ActionResult CambiarEstado(int id, [FromBody] string nuevoEstado)
-            //{
-            //    var pedido = _context.Pedidos.FirstOrDefault(p => p.Id == id);
-            //    if (pedido == null) return NotFound();
+        //    _context.Pedidos.Add(pedido);
+        //    _context.SaveChanges();
 
-            //    bool ok = pedido.CambiarEstado(nuevoEstado);
-            //    if (!ok) return BadRequest("No se puede entregar sin pago.");
+        //    return CreatedAtAction(nameof(GetById), new { id = pedido.Id }, pedido);
+        //}
 
-            //    _context.SaveChanges();
-            //    return NoContent();
-            //}
+        //[HttpPut("{id}/estado")]
+        //public ActionResult CambiarEstado(int id, [FromBody] string nuevoEstado)
+        //{
+        //    var pedido = _context.Pedidos.FirstOrDefault(p => p.Id == id);
+        //    if (pedido == null) return NotFound();
 
-            //[HttpDelete("{id}")]
-            //public ActionResult Delete(int id)
-            //{
-            //    var pedido = _context.Pedidos.FirstOrDefault(p => p.Id == id);
-            //    if (pedido == null) return NotFound();
+        //    bool ok = pedido.CambiarEstado(nuevoEstado);
+        //    if (!ok) return BadRequest("No se puede entregar sin pago.");
 
-            //    _context.Pedidos.Remove(pedido);
-            //    _context.SaveChanges();
+        //    _context.SaveChanges();
+        //    return NoContent();
+        //}
 
-            //    return NoContent();
-        }
+        //[HttpDelete("{id}")]
+        //public ActionResult Delete(int id)
+        //{
+        //    var pedido = _context.Pedidos.FirstOrDefault(p => p.Id == id);
+        //    if (pedido == null) return NotFound();
+
+        //    _context.Pedidos.Remove(pedido);
+        //    _context.SaveChanges();
+
+        //    return NoContent();
     }
+}
+
 

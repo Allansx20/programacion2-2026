@@ -15,6 +15,8 @@ namespace programacion2proyecto.Models
             CreateMap<Pedido, PedidoDto>().ReverseMap();
             CreateMap<Producto, ProductoDto>().ReverseMap();
             CreateMap<Entrega, EntregaDto>().ReverseMap();
-        }
+        
+        }   
     }
 }
+    

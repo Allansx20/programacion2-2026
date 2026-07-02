@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using programacion2proyecto.Data;
 using programacion2proyecto.Models.Entities;
 
@@ -10,66 +11,66 @@ namespace programacion2proyecto.Controllers
     {
         //private readonly DataContext _context; 
 
-        public EntregaController(DataContext context) : base(context)
-        {
-            {
-                //_context = context;
-            }
+        public EntregaController(DataContext context, IMapper mapper) : base(context, mapper) { }
 
-            //[HttpGet]
-            //public ActionResult<List<Entrega>> GetAll()
-            //{
-            //    return Ok(_context.Entregas.ToList());
-            //}
+        //{
+        //    _context = context;
+        //}
 
-            //[HttpGet("{id}")]
-            //public ActionResult<Entrega> GetById(int id)
-            //{
-            //    var entrega = _context.Entregas.FirstOrDefault(e => e.Id == id);
-            //    if (entrega == null) return NotFound();
-            //    return Ok(entrega);
-            //}
+        //[HttpGet]
+        //public ActionResult<List<Entrega>> GetAll()
+        //{
+        //    return Ok(_context.Entregas.ToList());
+        //}
 
-            //[HttpPost]
-            //public ActionResult<Entrega> Create(EntregaDto dto)
-            //{
-            //    var entrega = new Entrega
-            //    {
-            //        PedidoId = dto.PedidoId,
-            //        Tipo = dto.Tipo,
-            //        Direccion = dto.Direccion,
-            //        FechaProgramada = dto.FechaProgramada,
-            //        Confirmada = false
-            //    };
+        //[HttpGet("{id}")]
+        //public ActionResult<Entrega> GetById(int id)
+        //{
+        //    var entrega = _context.Entregas.FirstOrDefault(e => e.Id == id);
+        //    if (entrega == null) return NotFound();
+        //    return Ok(entrega);
+        //}
 
-            //    _context.Entregas.Add(entrega);
-            //    _context.SaveChanges();
+        //[HttpPost]
+        //public ActionResult<Entrega> Create(EntregaDto dto)
+        //{
+        //    var entrega = new Entrega
+        //    {
+        //        PedidoId = dto.PedidoId,
+        //        Tipo = dto.Tipo,
+        //        Direccion = dto.Direccion,
+        //        FechaProgramada = dto.FechaProgramada,
+        //        Confirmada = false
+        //    };
 
-            //    return CreatedAtAction(nameof(GetById), new { id = entrega.Id }, entrega);
-            //}
+        //    _context.Entregas.Add(entrega);
+        //    _context.SaveChanges();
 
-            //[HttpPut("{id}/confirmar")]
-            //public ActionResult Confirmar(int id)
-            //{
-            //    var entrega = _context.Entregas.FirstOrDefault(e => e.Id == id);
-            //    if (entrega == null) return NotFound();
+        //    return CreatedAtAction(nameof(GetById), new { id = entrega.Id }, entrega);
+        //}
 
-            //    entrega.ConfirmarEntrega();
-            //    _context.SaveChanges();
+        //[HttpPut("{id}/confirmar")]
+        //public ActionResult Confirmar(int id)
+        //{
+        //    var entrega = _context.Entregas.FirstOrDefault(e => e.Id == id);
+        //    if (entrega == null) return NotFound();
 
-            //    return NoContent();
-            //}
+        //    entrega.ConfirmarEntrega();
+        //    _context.SaveChanges();
 
-            //[HttpDelete("{id}")]
-            //public ActionResult Delete(int id)
-            //{
-            //    var entrega = _context.Entregas.FirstOrDefault(e => e.Id == id);
-            //    if (entrega == null) return NotFound();
+        //    return NoContent();
+        //}
 
-            //    _context.Entregas.Remove(entrega);
-            //    _context.SaveChanges();
+        //[HttpDelete("{id}")]
+        //public ActionResult Delete(int id)
+        //{
+        //    var entrega = _context.Entregas.FirstOrDefault(e => e.Id == id);
+        //    if (entrega == null) return NotFound();
 
-            //    return NoContent();
-        }
+        //    _context.Entregas.Remove(entrega);
+        //    _context.SaveChanges();
+
+        //    return NoContent();
     }
 }
+

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using programacion2proyecto.Data;
 using programacion2proyecto.Models.Entities;
 
@@ -9,9 +10,11 @@ namespace programacion2proyecto.Controllers
     public class BaseController<T> : ControllerBase where T : BaseEntity
     {
         public readonly DataContext _context;
-        public BaseController(DataContext context)
+        public readonly IMapper Mapper;
+        public BaseController(DataContext context, IMapper mapper)
         {
             _context = context;
+            Mapper = mapper;
         }
         [HttpGet]
         public virtual ActionResult<List<T>> GetAll()
