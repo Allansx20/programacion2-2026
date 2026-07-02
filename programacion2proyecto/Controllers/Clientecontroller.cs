@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using programacion2proyecto.Data;
+using programacion2proyecto.Models.Dtos;
 using programacion2proyecto.Models.Entities;
+using programacion2proyecto.Models.Responses;
 
 namespace programacion2proyecto.Controllers
 {
@@ -13,6 +15,31 @@ namespace programacion2proyecto.Controllers
         //readonly IMapper _mapper;
 
         public ClienteController(DataContext context, IMapper mapper) : base(context, mapper) { }
+
+        [HttpPost]
+        public ApiResponse<ClienteDto> Create(CreateClienteDto dto)
+        {
+            var cliente = Mapper.Map<Cliente>(dto);
+            _context.Clientes.Add(cliente);
+            _context.SaveChanges();
+
+            var response = Mapper.Map<ClienteDto>(cliente);
+            return ApiResponse<ClienteDto>.SuccessResponse(response, 201);
+        }
+
+        [HttpPut("{id}")]
+        public ApiResponse<ClienteDto> Update(int id, UpdateClienteDto dto)
+        {
+            var cliente = _context.Clientes.Find(id);
+            if (cliente == null)
+                return ApiResponse<ClienteDto>.FailureResponse("Cliente no encontrado.", 404);
+
+            Mapper.Map(dto, cliente);
+            _context.SaveChanges();
+
+            var response = Mapper.Map<ClienteDto>(cliente);
+            return ApiResponse<ClienteDto>.SuccessResponse(response);
+        }
 
         //using var _ = _context = context;
         //_mapper = mapper;

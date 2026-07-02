@@ -1,6 +1,6 @@
 ﻿namespace programacion2proyecto.Models.Dtos
 {
-    public class CreateProductoDto : BaseDto
+    public class CreateProductoDto
     {
         public string Nombre { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;

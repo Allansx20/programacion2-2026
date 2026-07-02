@@ -1,6 +1,6 @@
 ﻿namespace programacion2proyecto.Models.Dtos
 {
-    public class CreateEntregaDto : BaseDto
+    public class CreateEntregaDto
     {
         public int PedidoId { get; set; }
         public string Tipo { get; set; } = string.Empty;
