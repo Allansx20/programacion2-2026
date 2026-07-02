@@ -4,7 +4,7 @@ using programacion2proyecto.Models.Entities;
 
 namespace programacion2proyecto.Models
 {
-    public class MappingProfile: Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {
@@ -31,7 +31,6 @@ namespace programacion2proyecto.Models
             CreateMap<CreateEntregaDto, Entrega>();
             CreateMap<UpdateEntregaDto, Entrega>();
 
-        }   
+        }
     }
 }
-    
