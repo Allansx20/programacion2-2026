@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using programacion2proyecto.Data;
+using programacion2proyecto.Models.Dtos;
 using programacion2proyecto.Models.Entities;
+using programacion2proyecto.Models.Responses;
 
 namespace programacion2proyecto.Controllers
 {
@@ -12,6 +14,31 @@ namespace programacion2proyecto.Controllers
         //private readonly DataContext _context;
 
         public ProductoController(DataContext context, IMapper mapper) : base(context, mapper) { }
+
+        [HttpPost]
+        public ApiResponse<ProductoDto> Create(CreateProductoDto dto)
+        {
+            var producto = Mapper.Map<Producto>(dto);
+            _context.Productos.Add(producto);
+            _context.SaveChanges();
+
+            var response = Mapper.Map<ProductoDto>(producto);
+            return ApiResponse<ProductoDto>.SuccessResponse(response, 201);
+        }
+
+        [HttpPut("{id}")]
+        public ApiResponse<ProductoDto> Update(int id, UpdateProductoDto dto)
+        {
+            var producto = _context.Productos.Find(id);
+            if (producto == null)
+                return ApiResponse<ProductoDto>.FailureResponse("Producto no encontrado", 404);
+
+            Mapper.Map(dto, producto);
+            _context.SaveChanges();
+
+            var response = Mapper.Map<ProductoDto>(producto);
+            return ApiResponse<ProductoDto>.SuccessResponse(response, 201);
+        }
 
         //{
         //    //_context = context;

@@ -1,6 +1,6 @@
 ﻿namespace programacion2proyecto.Models.Dtos
 {
-    public class UptadeClienteDto : BaseDto
+    public class UpdateClienteDto
     {
         public string Nombre { get; set; } = string.Empty;
         public string Telefono { get; set; } = string.Empty;
