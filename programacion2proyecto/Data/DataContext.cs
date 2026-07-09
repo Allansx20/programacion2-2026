@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using programacion2proyecto.Models.Entities;
+using programacion2proyecto.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace programacion2proyecto.Data

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using programacion2proyecto.Domain.Entities;
 using programacion2proyecto.Models.Dtos;
-using programacion2proyecto.Models.Entities;
 
 namespace programacion2proyecto.Models
 {

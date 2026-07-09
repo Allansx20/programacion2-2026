@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using programacion2proyecto.Data;
-using programacion2proyecto.Models.Entities;
+using programacion2proyecto.Domain.Entities;
 
 namespace programacion2proyecto.Controllers
 {
