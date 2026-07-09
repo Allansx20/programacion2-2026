@@ -1,4 +1,6 @@
-﻿namespace programacion2proyecto.Models.Entities
+﻿using programacion2proyecto.Domain.Core;
+
+namespace programacion2proyecto.Domain.Entities
 {
     public class Pedido : BaseEntity
     {

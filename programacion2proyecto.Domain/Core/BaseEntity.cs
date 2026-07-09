@@ -1,4 +1,4 @@
-﻿namespace programacion2proyecto.Models.Entities
+﻿namespace programacion2proyecto.Domain.Core
 {
     public class BaseEntity
     {

@@ -1,6 +1,6 @@
-﻿namespace programacion2proyecto.Models.Entities
+﻿namespace programacion2proyecto.Domain.Entities
 {
-
+    using programacion2proyecto.Domain.Core;
     using System.Text.RegularExpressions;
 
 
