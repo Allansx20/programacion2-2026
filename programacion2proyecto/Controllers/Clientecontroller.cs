@@ -28,6 +28,7 @@ namespace programacion2proyecto.Controllers
         }
 
         [HttpPut("{id}")]
+
         public ApiResponse<ClienteDto> Update(int id, UpdateClienteDto dto)
         {
             var cliente = _context.Clientes.Find(id);
@@ -113,4 +114,6 @@ namespace programacion2proyecto.Controllers
         //            _context.SaveChanges();
         //            return NoContent();
     }
+
+
 }

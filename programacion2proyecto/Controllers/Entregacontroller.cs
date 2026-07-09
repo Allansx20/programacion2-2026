@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using programacion2proyecto.Data;
-using programacion2proyecto.Domain.Entities;
+using programacion2proyecto.Models.Dtos;
+using programacion2proyecto.Models.Entities;
+using programacion2proyecto.Models.Responses;
 
 namespace programacion2proyecto.Controllers
 {
@@ -12,6 +14,30 @@ namespace programacion2proyecto.Controllers
         //private readonly DataContext _context; 
 
         public EntregaController(DataContext context, IMapper mapper) : base(context, mapper) { }
+
+        [HttpPost]
+        public ApiResponse<EntregaDto> Create(CreateEntregaDto dto)
+        {
+            var entrega = Mapper.Map<Entrega>(dto);
+            _context.Entregas.Add(entrega);
+            _context.SaveChanges();
+
+            var response = Mapper.Map<EntregaDto>(entrega);
+            return ApiResponse<EntregaDto>.SuccessResponse(response, 201);
+        }
+
+        [HttpPut("{id}")]
+        public ApiResponse<EntregaDto> Update(int id, UpdateEntregaDto dto)
+        {
+            var entrega = _context.Entregas.Find(id);
+            if (entrega == null)
+                return ApiResponse<EntregaDto>.FailureResponse("Entrega no encontrada.", 404);
+            Mapper.Map(dto, entrega);
+            _context.SaveChanges();
+            var response = Mapper.Map<EntregaDto>(entrega);
+            return ApiResponse<EntregaDto>.SuccessResponse(response);
+        }
+
 
         //{
         //    _context = context;
