@@ -7,14 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Contex\DataContext.cs" />
-    <Compile Include="Repositories\ClienteRepository.cs" />
-    <Compile Include="Repositories\EntregaRepository.cs" />
-    <Compile Include="Repositories\PedidoRepository.cs" />
-    <Compile Include="Repositories\ProductoRepository.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.9">
