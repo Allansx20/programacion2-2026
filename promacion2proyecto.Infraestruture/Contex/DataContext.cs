@@ -2,7 +2,7 @@
 using programacion2proyecto.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace programacion2proyecto.Data
+namespace programacion2proyecto.Context
 {
     public class DataContext : DbContext
     {
