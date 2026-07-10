@@ -1,11 +1,17 @@
 using Microsoft.EntityFrameworkCore;
-using programacion2proyecto.Data;
+using programacion2proyecto.Context;
+using programacion2proyecto.Infraestructure.Repositories;
 using programacion2proyecto.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<ClienteRepository>();
+builder.Services.AddScoped<EntregaRepository>();
+builder.Services.AddScoped<PedidoRepository>();
+builder.Services.AddScoped<ProductoRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -28,8 +34,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();// adding something
     app.UseSwaggerUI();
 }
-
-
 
 app.MapControllers();
 

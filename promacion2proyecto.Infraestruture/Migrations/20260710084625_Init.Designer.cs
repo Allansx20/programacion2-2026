@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using programacion2proyecto.Data;
+using programacion2proyecto.Context;
 
 #nullable disable
 
-namespace programacion2proyecto.Migrations
+namespace promacion2proyecto.Infraestruture.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20260612110933_Init")]
+    [Migration("20260710084625_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace programacion2proyecto.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("programacion2proyecto.Models.Entities.Cliente", b =>
+            modelBuilder.Entity("programacion2proyecto.Domain.Entities.Cliente", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +57,7 @@ namespace programacion2proyecto.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("programacion2proyecto.Models.Entities.Entrega", b =>
+            modelBuilder.Entity("programacion2proyecto.Domain.Entities.Entrega", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -90,7 +90,7 @@ namespace programacion2proyecto.Migrations
                     b.ToTable("Entregas");
                 });
 
-            modelBuilder.Entity("programacion2proyecto.Models.Entities.Pedido", b =>
+            modelBuilder.Entity("programacion2proyecto.Domain.Entities.Pedido", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -124,7 +124,7 @@ namespace programacion2proyecto.Migrations
                     b.ToTable("Pedidos");
                 });
 
-            modelBuilder.Entity("programacion2proyecto.Models.Entities.Producto", b =>
+            modelBuilder.Entity("programacion2proyecto.Domain.Entities.Producto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -155,9 +155,9 @@ namespace programacion2proyecto.Migrations
                     b.ToTable("Productos");
                 });
 
-            modelBuilder.Entity("programacion2proyecto.Models.Entities.Pedido", b =>
+            modelBuilder.Entity("programacion2proyecto.Domain.Entities.Pedido", b =>
                 {
-                    b.HasOne("programacion2proyecto.Models.Entities.Cliente", "Cliente")
+                    b.HasOne("programacion2proyecto.Domain.Entities.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
