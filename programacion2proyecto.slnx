@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/Data/">
     <Project Path="programacion2proyecto.Domain/programacion2proyecto.Domain.csproj" Id="883a6853-56c5-42d0-8896-00f558f99c57" />
-    <Project Path="promacion2proyecto.Infraestruture/programacion2proyecto.Infraestructure.csproj" Id="66c062c2-b97d-430a-89f6-1374b14197ee" />
+    <Project Path="programacion2proyecto.Infraestructure/programacion2proyecto.Infraestructure.csproj" />
   </Folder>
   <Project Path="programacion2proyecto/programacion2proyecto.csproj" />
 </Solution>

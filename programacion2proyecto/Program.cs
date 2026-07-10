@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using programacion2proyecto.Context;
+using programacion2proyecto.Infraestructure.Contex;
 using programacion2proyecto.Infraestructure.Repositories;
 using programacion2proyecto.Models;
 
