@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using programacion2proyecto.Context;
 using programacion2proyecto.Domain.Entities;
+using programacion2proyecto.Infraestructure.Contex;
 using programacion2proyecto.Infraestructure.Repositories;
 using programacion2proyecto.Models.Dtos;
 using programacion2proyecto.Models.Responses;
