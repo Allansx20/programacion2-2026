@@ -1,4 +1,4 @@
-﻿namespace programacion2proyecto.Models.Dtos
+﻿namespace programacion2proyecto.Application.Models.Dtos
 {
     public class UpdatePedidoDto
     {

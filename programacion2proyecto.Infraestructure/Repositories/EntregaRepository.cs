@@ -27,7 +27,7 @@ namespace programacion2proyecto.Infraestructure.Repositories
         public int Create(Entrega entrega)
         {
             _context.Entregas.Add(entrega);
-            _context.SaveChanges();
+            //_context.SaveChanges();
             return entrega.Id;
         }
 
@@ -43,7 +43,7 @@ namespace programacion2proyecto.Infraestructure.Repositories
             existing.Confirmada = request.Confirmada;
 
             _context.Entregas.Update(existing);
-            _context.SaveChanges();
+            //_context.SaveChanges();
             return true;
         }
 
@@ -54,8 +54,13 @@ namespace programacion2proyecto.Infraestructure.Repositories
                 return false;
 
             _context.Entregas.Remove(existing);
-            _context.SaveChanges();
+            //_context.SaveChanges();
             return true;
+        }
+
+        public void Update(Entrega existente)
+        {
+            throw new NotImplementedException();
         }
     }
 }

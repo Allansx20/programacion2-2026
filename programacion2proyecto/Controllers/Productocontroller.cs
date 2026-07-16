@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using programacion2proyecto.Application.Models.Dtos;
+using programacion2proyecto.Application.Models.Responses;
+using programacion2proyecto.Application.Services;
 using programacion2proyecto.Domain.Entities;
-using programacion2proyecto.Infraestructure.Contex;
-using programacion2proyecto.Infraestructure.Repositories;
-using programacion2proyecto.Models.Dtos;
-using programacion2proyecto.Models.Responses;
+
 
 namespace programacion2proyecto.Controllers
 {
@@ -12,65 +12,72 @@ namespace programacion2proyecto.Controllers
     [Route("api/[controller]")]
     public class ProductoController : BaseController<Producto>
     {
-        private readonly ProductoRepository _repository;
+        //private readonly ProductoRepository _repository;
+        //private readonly UnitOfwork _unitOfWork;
+        private readonly ProductoService _productoService;
 
-        public ProductoController(DataContext context, ProductoRepository repository, IMapper mapper)
-            : base(context, mapper)
+        public ProductoController(/*UnitOfwork unitOfWork,*/ProductoService productoService,
+            IMapper mapper)
+             : base(mapper)
         {
-            _repository = repository;
+            //this._unitOfWork = unitOfWork;
+            _productoService = productoService;
         }
 
         [HttpGet]
-        public ApiResponse<List<ProductoDto>> GetAll()
-        {
-            var productos = _repository.GetAll().ToList();
-            var response = Mapper.Map<List<ProductoDto>>(productos);
-            return ApiResponse<List<ProductoDto>>.SuccessResponse(response);
-        }
+        public ApiResponse<IEnumerable<ProductoDto>> GetAll() => _productoService.GetAll();
+        //{
+        //    var productos = _unitOfWork.ProductoRepository.GetAll().ToList();
+        //    var response = Mapper.Map<List<ProductoDto>>(productos);
+        //    return ApiResponse<List<ProductoDto>>.SuccessResponse(response);
+        //}
 
         [HttpGet("{id}")]
-        public ApiResponse<ProductoDto> GetById(int id)
-        {
-            var producto = _repository.GetById(id);
-            if (producto == null)
-                return ApiResponse<ProductoDto>.FailureResponse("Recurso no encontrado.", 404);
+        public ApiResponse<ProductoDto> GetById(int id) => _productoService.GetById(id);
+        //{
+        //    var producto = _unitOfWork.ProductoRepository.GetById(id);
+        //    if (producto == null)
+        //        return ApiResponse<ProductoDto>.FailureResponse("Recurso no encontrado.", 404);
 
-            var response = Mapper.Map<ProductoDto>(producto);
-            return ApiResponse<ProductoDto>.SuccessResponse(response);
-        }
+        //    var response = Mapper.Map<ProductoDto>(producto);
+        //    return ApiResponse<ProductoDto>.SuccessResponse(response);
+        //}
 
         [HttpPost]
-        public ApiResponse<ProductoDto> Create(CreateProductoDto dto)
-        {
-            var producto = Mapper.Map<Producto>(dto);
-            _repository.Create(producto);
+        public ApiResponse<ProductoDto> Create(CreateProductoDto dto) => _productoService.Create(dto);
+        //{
+        //    var producto = Mapper.Map<Producto>(dto);
+        //    _unitOfWork.ProductoRepository.Create(producto);
+        //    _unitOfWork.Complete();
 
-            var response = Mapper.Map<ProductoDto>(producto);
-            return ApiResponse<ProductoDto>.SuccessResponse(response, 201);
-        }
+        //    var response = Mapper.Map<ProductoDto>(producto);
+        //    return ApiResponse<ProductoDto>.SuccessResponse(response, 201);
+        //}
 
         [HttpPut("{id}")]
-        public ApiResponse<ProductoDto> Update(int id, UpdateProductoDto dto)
-        {
-            var producto = Mapper.Map<Producto>(dto);
-            var success = _repository.Update(id, producto);
+        public ApiResponse<ProductoDto> Update(int id, UpdateProductoDto dto) => _productoService.Update(id, dto);
+        //{
+        //    var producto = Mapper.Map<Producto>(dto);
+        //    var success = _unitOfWork.ProductoRepository.Update(id, producto);
 
-            if (!success)
-                return ApiResponse<ProductoDto>.FailureResponse("Producto no encontrado.", 404);
+        //    if (!success)
+        //        return ApiResponse<ProductoDto>.FailureResponse("Producto no encontrado.", 404);
+        //    _unitOfWork.Complete();
 
-            var response = Mapper.Map<ProductoDto>(producto);
-            return ApiResponse<ProductoDto>.SuccessResponse(response);
-        }
+        //    var response = Mapper.Map<ProductoDto>(producto);
+        //    return ApiResponse<ProductoDto>.SuccessResponse(response);
+        //}
 
         [HttpDelete("{id}")]
-        public ApiResponse<string> Delete(int id)
-        {
-            var success = _repository.Delete(id);
-            if (!success)
-                return ApiResponse<string>.FailureResponse("Recurso no encontrado.", 404);
+        public ApiResponse<string> Delete(int id) => _productoService.Delete(id);
+        //{
+        //    var success = _unitOfWork.ProductoRepository.Delete(id);
+        //    if (!success)
+        //        return ApiResponse<string>.FailureResponse("Recurso no encontrado.", 404);
+        //    _unitOfWork.Complete();
 
-            return ApiResponse<string>.SuccessResponse("Eliminado correctamente.", 200);
-        }
+        //    return ApiResponse<string>.SuccessResponse("Eliminado correctamente.", 200);
+        //}
     }
 }
 

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using programacion2proyecto.Application.Models.Dtos;
+using programacion2proyecto.Application.Models.Responses;
+using programacion2proyecto.Application.Services;
 using programacion2proyecto.Domain.Entities;
-using programacion2proyecto.Infraestructure.Contex;
-using programacion2proyecto.Infraestructure.Repositories;
-using programacion2proyecto.Models.Dtos;
-using programacion2proyecto.Models.Responses;
+
 
 namespace programacion2proyecto.Controllers
 {
@@ -12,65 +12,75 @@ namespace programacion2proyecto.Controllers
     [Route("api/[controller]")]
     public class ClienteController : BaseController<Cliente>
     {
-        private readonly ClienteRepository _repository;
+        //private readonly ClienteRepository _repository;
+        //private readonly UnitOfwork _unitOfWork;
 
-        public ClienteController(DataContext context, ClienteRepository repository, IMapper mapper)
-            : base(context, mapper)
+        //private readonly UnitOfwork _unitOfWork;
+        private readonly ClienteService _clienteService;
+
+        public ClienteController(/*UnitOfwork unitOfWork*/ClienteService clienteService,
+            IMapper mapper)
+            : base(mapper)
         {
-            _repository = repository;
+            _clienteService = clienteService;
+            //this._unitOfWork = unitOfWork;
         }
+
 
         [HttpGet]
-        public ApiResponse<List<ClienteDto>> GetAll()
-        {
-            var clientes = _repository.GetAll().ToList();
-            var response = Mapper.Map<List<ClienteDto>>(clientes);
-            return ApiResponse<List<ClienteDto>>.SuccessResponse(response);
-        }
+        public ApiResponse<IEnumerable<ClienteDto>> GetAll() => _clienteService.GetAll();
+
+        /*var clientes = *//*_clienteService.GetAllCliente();*/
+        //var response = Mapper.Map<List<ClienteDto>>(clientes);
+        //return ApiResponse<List<ClienteDto>>.SuccessResponse(response);
+
 
         [HttpGet("{id}")]
-        public ApiResponse<ClienteDto> GetById(int id)
-        {
-            var cliente = _repository.GetById(id);
-            if (cliente == null)
-                return ApiResponse<ClienteDto>.FailureResponse("Recurso no encontrado.", 404);
+        public ApiResponse<ClienteDto> GetById(int id) => _clienteService.GetById(id);
+        //{
+        //    var cliente = _unitOfWork.ClienteRepository.GetById(id);
+        //    if (cliente == null)
+        //        return ApiResponse<ClienteDto>.FailureResponse("Recurso no encontrado.", 404);
 
-            var response = Mapper.Map<ClienteDto>(cliente);
-            return ApiResponse<ClienteDto>.SuccessResponse(response);
-        }
+        //    var response = Mapper.Map<ClienteDto>(cliente);
+        //    return ApiResponse<ClienteDto>.SuccessResponse(response);
+        //}
 
         [HttpPost]
-        public ApiResponse<ClienteDto> Create(CreateClienteDto dto)
-        {
-            var cliente = Mapper.Map<Cliente>(dto);
-            _repository.Create(cliente);
+        public ApiResponse<ClienteDto> Create(CreateClienteDto dto) => _clienteService.Create(dto);
+        //{
+        //    var cliente = Mapper.Map<Cliente>(dto);
+        //    _unitOfWork.ClienteRepository.Create(cliente);
+        //    _unitOfWork.Complete();
 
-            var response = Mapper.Map<ClienteDto>(cliente);
-            return ApiResponse<ClienteDto>.SuccessResponse(response, 201);
-        }
+        //    var response = Mapper.Map<ClienteDto>(cliente);
+        //    return ApiResponse<ClienteDto>.SuccessResponse(response, 201);
+        //}
 
         [HttpPut("{id}")]
-        public ApiResponse<ClienteDto> Update(int id, UpdateClienteDto dto)
-        {
-            var cliente = Mapper.Map<Cliente>(dto);
-            var success = _repository.Update(id, cliente);
+        public ApiResponse<ClienteDto> Update(int id, UpdateClienteDto dto) => _clienteService.Update(id, dto);
+        //{
+        //    var cliente = Mapper.Map<Cliente>(dto);
+        //    var success = _unitOfWork.ClienteRepository.Update(id, cliente);
 
-            if (!success)
-                return ApiResponse<ClienteDto>.FailureResponse("Cliente no encontrado.", 404);
+        //    if (!success)
+        //        return ApiResponse<ClienteDto>.FailureResponse("Cliente no encontrado.", 404);
+        //    _unitOfWork.Complete();
 
-            var response = Mapper.Map<ClienteDto>(cliente);
-            return ApiResponse<ClienteDto>.SuccessResponse(response);
-        }
+        //    var response = Mapper.Map<ClienteDto>(cliente);
+        //    return ApiResponse<ClienteDto>.SuccessResponse(response);
+        //}
 
         [HttpDelete("{id}")]
-        public ApiResponse<string> Delete(int id)
-        {
-            var success = _repository.Delete(id);
-            if (!success)
-                return ApiResponse<string>.FailureResponse("Recurso no encontrado.", 404);
+        public ApiResponse<string> Delete(int id) => _clienteService.Delete(id);
+        //{
+        //    var success = _unitOfWork.ClienteRepository.Delete(id);
+        //    if (!success)
+        //        return ApiResponse<string>.FailureResponse("Recurso no encontrado.", 404);
+        //    _unitOfWork.Complete();
 
-            return ApiResponse<string>.SuccessResponse("Eliminado correctamente.", 200);
-        }
+        //    return ApiResponse<string>.SuccessResponse("Eliminado correctamente.", 200);
+        //}
     }
 }
 

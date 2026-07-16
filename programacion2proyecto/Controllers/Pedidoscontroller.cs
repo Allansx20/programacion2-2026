@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using programacion2proyecto.Application.Models.Dtos;
+using programacion2proyecto.Application.Models.Responses;
+using programacion2proyecto.Application.Services;
 using programacion2proyecto.Domain.Entities;
-using programacion2proyecto.Infraestructure.Contex;
-using programacion2proyecto.Infraestructure.Repositories;
-using programacion2proyecto.Models.Dtos;
-using programacion2proyecto.Models.Responses;
+
 
 namespace programacion2proyecto.Controllers
 {
@@ -12,65 +12,73 @@ namespace programacion2proyecto.Controllers
     [Route("api/[controller]")]
     public class PedidoController : BaseController<Pedido>
     {
-        private readonly PedidoRepository _repository;
+        //private readonly PedidoRepository _repository;
+        //private readonly UnitOfwork _unitOfWork;
+        private readonly PedidoService _pedidoService;
 
-        public PedidoController(DataContext context, PedidoRepository repository, IMapper mapper)
-            : base(context, mapper)
+        public PedidoController(/*UnitOfwork unitOfWork,*/PedidoService pedidoService,
+            IMapper mapper)
+             : base(mapper)
         {
-            _repository = repository;
+            _pedidoService = pedidoService;
+            //this._unitOfWork = unitOfWork;
         }
 
         [HttpGet]
-        public ApiResponse<List<PedidoDto>> GetAll()
-        {
-            var pedidos = _repository.GetAll().ToList();
-            var response = Mapper.Map<List<PedidoDto>>(pedidos);
-            return ApiResponse<List<PedidoDto>>.SuccessResponse(response);
-        }
+        public ApiResponse<IEnumerable<PedidoDto>> GetAll() => _pedidoService.GetAll();
+
+        //{
+        //    var pedidos = _unitOfWork.PedidoRepository.GetAll().ToList();
+        //    var response = Mapper.Map<List<PedidoDto>>(pedidos);
+        //    return ApiResponse<List<PedidoDto>>.SuccessResponse(response);
+        //}
 
         [HttpGet("{id}")]
-        public ApiResponse<PedidoDto> GetById(int id)
-        {
-            var pedido = _repository.GetById(id);
-            if (pedido == null)
-                return ApiResponse<PedidoDto>.FailureResponse("Recurso no encontrado.", 404);
+        public ApiResponse<PedidoDto> GetById(int id) => _pedidoService.GetById(id);
+        //{
+        //    var pedido = _unitOfWork.PedidoRepository.GetById(id);
+        //    if (pedido == null)
+        //        return ApiResponse<PedidoDto>.FailureResponse("Recurso no encontrado.", 404);
 
-            var response = Mapper.Map<PedidoDto>(pedido);
-            return ApiResponse<PedidoDto>.SuccessResponse(response);
-        }
+        //    var response = Mapper.Map<PedidoDto>(pedido);
+        //    return ApiResponse<PedidoDto>.SuccessResponse(response);
+        //}
 
         [HttpPost]
-        public ApiResponse<PedidoDto> Create(CreatePedidoDto dto)
-        {
-            var pedido = Mapper.Map<Pedido>(dto);
-            _repository.Create(pedido);
+        public ApiResponse<PedidoDto> Create(CreatePedidoDto dto) => _pedidoService.Create(dto);
+        //{
+        //    var pedido = Mapper.Map<Pedido>(dto);
+        //    _unitOfWork.PedidoRepository.Create(pedido);
+        //    _unitOfWork.Complete();
 
-            var response = Mapper.Map<PedidoDto>(pedido);
-            return ApiResponse<PedidoDto>.SuccessResponse(response, 201);
-        }
+        //    var response = Mapper.Map<PedidoDto>(pedido);
+        //    return ApiResponse<PedidoDto>.SuccessResponse(response, 201);
+        //}
 
         [HttpPut("{id}")]
-        public ApiResponse<PedidoDto> Update(int id, UpdatePedidoDto dto)
-        {
-            var pedido = Mapper.Map<Pedido>(dto);
-            var success = _repository.Update(id, pedido);
+        public ApiResponse<PedidoDto> Update(int id, UpdatePedidoDto dto) => _pedidoService.Update(id, dto);
+        //{
+        //    var pedido = Mapper.Map<Pedido>(dto);
+        //    var success = _unitOfWork.PedidoRepository.Update(id, pedido);
 
-            if (!success)
-                return ApiResponse<PedidoDto>.FailureResponse("Pedido no encontrado.", 404);
+        //    if (!success)
+        //        return ApiResponse<PedidoDto>.FailureResponse("Pedido no encontrado.", 404);
+        //    _unitOfWork.Complete();
 
-            var response = Mapper.Map<PedidoDto>(pedido);
-            return ApiResponse<PedidoDto>.SuccessResponse(response);
-        }
+        //    var response = Mapper.Map<PedidoDto>(pedido);
+        //    return ApiResponse<PedidoDto>.SuccessResponse(response);
+        //}
 
         [HttpDelete("{id}")]
-        public ApiResponse<string> Delete(int id)
-        {
-            var success = _repository.Delete(id);
-            if (!success)
-                return ApiResponse<string>.FailureResponse("Recurso no encontrado.", 404);
+        public ApiResponse<string> Delete(int id) => _pedidoService.Delete(id);
+        //{
+        //    var success = _unitOfWork.PedidoRepository.Delete(id);
+        //    if (!success)
+        //        return ApiResponse<string>.FailureResponse("Recurso no encontrado.", 404);
+        //    _unitOfWork.Complete();
 
-            return ApiResponse<string>.SuccessResponse("Eliminado correctamente.", 200);
-        }
+        //    return ApiResponse<string>.SuccessResponse("Eliminado correctamente.", 200);
+        //}
     }
 }
 

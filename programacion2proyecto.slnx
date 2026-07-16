@@ -1,7 +1,10 @@
 <Solution>
-  <Folder Name="/Data/">
-    <Project Path="programacion2proyecto.Domain/programacion2proyecto.Domain.csproj" Id="883a6853-56c5-42d0-8896-00f558f99c57" />
-    <Project Path="programacion2proyecto.Infraestructure/programacion2proyecto.Infraestructure.csproj" />
+  <Folder Name="/Business/">
+    <Project Path="../../../../../../../../Proyectos en la Raiz de C/programacion2-2026/programacion2proyecto.Application/programacion2proyecto.Application.csproj" Id="31ecdecf-d489-4a14-93a3-e2e1d29fe199" />
   </Folder>
-  <Project Path="programacion2proyecto/programacion2proyecto.csproj" />
+  <Folder Name="/Data/">
+    <Project Path="../../../../../../../../Proyectos en la Raiz de C/programacion2-2026/programacion2proyecto.Domain/programacion2proyecto.Domain.csproj" Id="883a6853-56c5-42d0-8896-00f558f99c57" />
+    <Project Path="../../../../../../../../Proyectos en la Raiz de C/programacion2-2026/programacion2proyecto.Infraestructure/programacion2proyecto.Infraestructure.csproj" />
+  </Folder>
+  <Project Path="../../../../../../../../Proyectos en la Raiz de C/programacion2-2026/programacion2proyecto/programacion2proyecto.csproj" />
 </Solution>

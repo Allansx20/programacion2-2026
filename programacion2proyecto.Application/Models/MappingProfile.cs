@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using programacion2proyecto.Application.Models.Dtos;
 using programacion2proyecto.Domain.Entities;
-using programacion2proyecto.Models.Dtos;
 
-namespace programacion2proyecto.Models
+namespace programacion2proyecto.Application.Models
 {
     public class MappingProfile : Profile
     {
