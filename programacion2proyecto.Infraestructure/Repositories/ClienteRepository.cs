@@ -27,7 +27,7 @@ namespace programacion2proyecto.Infraestructure.Repositories
         public int Create(Cliente cliente)
         {
             _context.Clientes.Add(cliente);
-            _context.SaveChanges();
+            //_context.SaveChanges();
             return cliente.Id;
         }
 
@@ -43,7 +43,7 @@ namespace programacion2proyecto.Infraestructure.Repositories
             existing.Direccion = request.Direccion;
 
             _context.Clientes.Update(existing);
-            _context.SaveChanges();
+            //_context.SaveChanges();
             return true;
 
         }
@@ -56,9 +56,14 @@ namespace programacion2proyecto.Infraestructure.Repositories
 
 
             _context.Clientes.Remove(existing);
-            _context.SaveChanges();
+            //_context.SaveChanges();
             return true;
 
+        }
+
+        public void Update(Cliente existente)
+        {
+            throw new NotImplementedException();
         }
     }
 }

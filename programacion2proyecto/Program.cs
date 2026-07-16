@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using programacion2proyecto.Application.Models;
+using programacion2proyecto.Application.Services;
 using programacion2proyecto.Infraestructure.Contex;
 using programacion2proyecto.Infraestructure.Repositories;
-using programacion2proyecto.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +14,17 @@ builder.Services.AddScoped<ClienteRepository>();
 builder.Services.AddScoped<EntregaRepository>();
 builder.Services.AddScoped<PedidoRepository>();
 builder.Services.AddScoped<ProductoRepository>();
+builder.Services.AddScoped<UnitOfwork>();
+
+builder.Services.AddScoped<ClienteService>();
+builder.Services.AddScoped<PedidoService>();
+builder.Services.AddScoped<ProductoService>();
+builder.Services.AddScoped<EntregaService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 builder.Services.AddAutoMapper(cfg =>
 {

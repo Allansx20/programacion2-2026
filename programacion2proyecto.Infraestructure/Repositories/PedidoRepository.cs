@@ -27,7 +27,7 @@ namespace programacion2proyecto.Infraestructure.Repositories
         public int Create(Pedido pedido)
         {
             _context.Pedidos.Add(pedido);
-            _context.SaveChanges();
+            //_context.SaveChanges();
             return pedido.Id;
         }
 
@@ -43,7 +43,7 @@ namespace programacion2proyecto.Infraestructure.Repositories
             existing.Pagado = request.Pagado;
 
             _context.Pedidos.Update(existing);
-            _context.SaveChanges();
+            //_context.SaveChanges();
             return true;
         }
 
@@ -54,8 +54,13 @@ namespace programacion2proyecto.Infraestructure.Repositories
                 return false;
 
             _context.Pedidos.Remove(existing);
-            _context.SaveChanges();
+            //_context.SaveChanges();
             return true;
+        }
+
+        public void Update(Pedido existente)
+        {
+            throw new NotImplementedException();
         }
     }
 }

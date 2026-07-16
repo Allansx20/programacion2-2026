@@ -27,7 +27,7 @@ namespace programacion2proyecto.Infraestructure.Repositories
         public int Create(Producto producto)
         {
             _context.Productos.Add(producto);
-            _context.SaveChanges();
+            //_context.SaveChanges();
             return producto.Id;
         }
 
@@ -44,7 +44,7 @@ namespace programacion2proyecto.Infraestructure.Repositories
             existing.Disponible = request.Disponible;
 
             _context.Productos.Update(existing);
-            _context.SaveChanges();
+            //_context.SaveChanges();
             return true;
         }
 
@@ -55,8 +55,13 @@ namespace programacion2proyecto.Infraestructure.Repositories
                 return false;
 
             _context.Productos.Remove(existing);
-            _context.SaveChanges();
+            //_context.SaveChanges();
             return true;
+        }
+
+        public void Update(Producto existente)
+        {
+            throw new NotImplementedException();
         }
     }
 }

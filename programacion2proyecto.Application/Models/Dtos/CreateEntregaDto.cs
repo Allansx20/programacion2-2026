@@ -1,10 +1,11 @@
-﻿namespace programacion2proyecto.Models.Dtos
+﻿namespace programacion2proyecto.Application.Models.Dtos
 {
-    public class EntregaDto : BaseDto
+    public class CreateEntregaDto
     {
         public int PedidoId { get; set; }
-        public string Tipo { get; set; } = "retiro";
+        public string Tipo { get; set; } = string.Empty;
         public string Direccion { get; set; } = string.Empty;
         public DateTime FechaProgramada { get; set; }
+
     }
 }
