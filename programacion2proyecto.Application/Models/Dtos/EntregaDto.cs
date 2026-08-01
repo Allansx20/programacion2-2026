@@ -6,5 +6,7 @@
         public string Tipo { get; set; } = "retiro";
         public string Direccion { get; set; } = string.Empty;
         public DateTime FechaProgramada { get; set; }
+        public DateTime? FechaReal { get; set; }
+        public bool Confirmada { get; set; }
     }
 }
