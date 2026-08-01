@@ -12,7 +12,7 @@ namespace programacion2proyecto.Domain.Entities
         public string Estado { get; set; } = "pendiente";
         public decimal Total { get; set; }
         public bool Pagado { get; set; } = false;
-
+        public ICollection<DetallePedido> Detalles { get; set; } = new List<DetallePedido>();
         public bool CambiarEstado(string nuevoEstado)
         {
             if (nuevoEstado == "entregado" && !Pagado)

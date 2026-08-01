@@ -35,6 +35,10 @@ namespace programacion2proyecto.Application.Models
             CreateMap<UpdateEntregaDto, Entrega>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
+            // Mapeos para DetallePedido
+            CreateMap<DetallePedido, DetallePedidoDto>().ReverseMap();
+            CreateMap<CreateDetallePedidoDto, DetallePedido>();
+
         }
     }
 }

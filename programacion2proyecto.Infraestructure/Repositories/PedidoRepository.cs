@@ -1,4 +1,5 @@
-﻿using programacion2proyecto.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using programacion2proyecto.Domain.Entities;
 using programacion2proyecto.Infraestructure.Contex;
 
 namespace programacion2proyecto.Infraestructure.Repositories
@@ -14,38 +15,40 @@ namespace programacion2proyecto.Infraestructure.Repositories
 
         public IEnumerable<Pedido> GetAll()
         {
-            var pedidos = _context.Pedidos.ToList();
+
+            var pedidos = _context.Pedidos.Include(p => p.Detalles).ToList();
             return pedidos;
         }
 
         public Pedido? GetById(int id)
         {
-            var pedido = _context.Pedidos.FirstOrDefault(p => p.Id == id);
+
+            var pedido = _context.Pedidos.Include(p => p.Detalles).FirstOrDefault(p => p.Id == id);
             return pedido;
         }
 
-        public int Create(Pedido pedido)
+        public void Create(Pedido pedido)
         {
             _context.Pedidos.Add(pedido);
             //_context.SaveChanges();
-            return pedido.Id;
+
         }
 
-        public bool Update(int id, Pedido request)
-        {
-            var existing = _context.Pedidos.FirstOrDefault(p => p.Id == id);
-            if (existing == null)
-                return false;
+        //public bool Update(int id, Pedido request)
+        //{
+        //    var existing = _context.Pedidos.FirstOrDefault(p => p.Id == id);
+        //    if (existing == null)
+        //        return false;
 
-            existing.FechaEntrega = request.FechaEntrega;
-            existing.Estado = request.Estado;
-            existing.Total = request.Total;
-            existing.Pagado = request.Pagado;
+        //    existing.FechaEntrega = request.FechaEntrega;
+        //    existing.Estado = request.Estado;
+        //    existing.Total = request.Total;
+        //    existing.Pagado = request.Pagado;
 
-            _context.Pedidos.Update(existing);
-            //_context.SaveChanges();
-            return true;
-        }
+        //    _context.Pedidos.Update(existing);
+        //    //_context.SaveChanges();
+        //    return true;
+        //}
 
         public bool Delete(int id)
         {
@@ -58,9 +61,9 @@ namespace programacion2proyecto.Infraestructure.Repositories
             return true;
         }
 
-        public void Update(Pedido existente)
+        public void Update(Pedido pedido)
         {
-            throw new NotImplementedException();
+            _context.Pedidos.Update(pedido);
         }
     }
 }

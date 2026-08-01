@@ -6,6 +6,7 @@ namespace programacion2proyecto.Domain.Entities
     {
         //public int Id { get; set; }
         public int PedidoId { get; set; }
+        public Pedido Pedido { get; set; } = null!; // <--- Agrega esta línea
         public string Tipo { get; set; } = "retiro";
         public string Direccion { get; set; } = string.Empty;
         public DateTime FechaProgramada { get; set; }

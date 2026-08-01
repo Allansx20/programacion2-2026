@@ -5,6 +5,7 @@
         public int ClienteId { get; set; }
         public DateTime FechaEntrega { get; set; }
         public decimal Total { get; set; }
-        public bool Pagado { get; set; } 
+        public bool Pagado { get; set; }
+        public List<CreateDetallePedidoDto> Detalles { get; set; } = new List<CreateDetallePedidoDto>();
     }
 }
