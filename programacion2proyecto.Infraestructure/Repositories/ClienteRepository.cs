@@ -1,5 +1,6 @@
 ﻿using programacion2proyecto.Domain.Entities;
 using programacion2proyecto.Infraestructure.Contex;
+using Microsoft.EntityFrameworkCore;
 
 namespace programacion2proyecto.Infraestructure.Repositories
 {

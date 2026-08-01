@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace programacion2proyecto.Application.Models.Dtos
+﻿namespace programacion2proyecto.Application.Models.Dtos
 {
-    internal class CreateDetallePedidoDto
+    public class CreateDetallePedidoDto
     {
+        public int ProductoId { get; set; }
+        public int Cantidad { get; set; }
+        public decimal PrecioUnitario { get; set; }
     }
 }
